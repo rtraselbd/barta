@@ -33,11 +33,21 @@ Kotha is a clean, expressive Laravel package designed to integrate popular Bangl
 
 ## 📦 Supported Gateways
 
-| Gateway                      | Status       |
-| ---------------------------- | ------------ |
-| Log (Development)            | ✅ Built-in  |
-| [eSMS](https://esms.com.bd)  | ✅ Supported |
-| [MimSMS](https://mimsms.com) | ✅ Supported |
+| Gateway                                 | Driver         | Status       |
+| --------------------------------------- | -------------- | ------------ |
+| Log (Development)                       | `log`          | ✅ Built-in  |
+| [eSMS](https://esms.com.bd)             | `esms`         | ✅ Supported |
+| [MimSMS](https://mimsms.com)            | `mimsms`       | ✅ Supported |
+| [SSL Wireless](https://sslwireless.com) | `ssl`          | ✅ Supported |
+| Grameenphone                            | `grameenphone` | ✅ Supported |
+| Banglalink                              | `banglalink`   | ✅ Supported |
+| Robi                                    | `robi`         | ✅ Supported |
+| [Infobip](https://infobip.com)          | `infobip`      | ✅ Supported |
+| [ADN SMS](https://portal.adnsms.com)    | `adnsms`       | ✅ Supported |
+| [Alpha SMS](https://sms.net.bd)         | `alphasms`     | ✅ Supported |
+| [GreenWeb](https://greenweb.com.bd)     | `greenweb`     | ✅ Supported |
+| [BulkSMS BD](https://bulksmsbd.net)     | `bulksms`      | ✅ Supported |
+| [ElitBuzz](https://elitbuzz.com)        | `elitbuzz`     | ✅ Supported |
 
 > **Want more gateways?** [Request a gateway](https://github.com/iRaziul/kotha/issues) or [contribute a driver](#-creating-custom-drivers).
 
@@ -57,35 +67,21 @@ Run the install command (publishes config + optional setup):
 php artisan kotha:install
 ```
 
-Or publish the config manually:
-
-```bash
-php artisan vendor:publish --tag="kotha-config"
-```
-
 ---
 
 ## ⚙️ Configuration
 
-Add your gateway credentials to `.env`:
+Set your default driver and add credentials to `.env`:
 
 ```env
-KOTHA_DRIVER=esms
+KOTHA_DRIVER=ssl
 
-# eSMS
-KOTHA_ESMS_TOKEN=your-esms-api-token
-KOTHA_ESMS_SENDER_ID=your-sender-id
-
-# MimSMS
-KOTHA_MIMSMS_USERNAME=your-username
-KOTHA_MIMSMS_API_KEY=your-api-key
-KOTHA_MIMSMS_SENDER_ID=your-sender-id
-
-# Request Settings (Optional)
-KOTHA_REQUEST_TIMEOUT=10
-KOTHA_REQUEST_RETRY=3
-KOTHA_REQUEST_RETRY_DELAY=300
+# Example: SSL Wireless
+KOTHA_SSL_TOKEN=your-api-token
+KOTHA_SSL_SENDER_ID=your-sender-id
 ```
+
+Each gateway requires different credentials. See [`config/kotha.php`](config/kotha.php) for all available options and environment variable names.
 
 > 💡 **Tip:** Use `log` driver during development to avoid sending real SMS.
 
