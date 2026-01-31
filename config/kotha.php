@@ -76,6 +76,10 @@ return [
             'sender_id' => env('KOTHA_ELITBUZZ_SENDER_ID'),
             'type' => env('KOTHA_ELITBUZZ_TYPE', 'text'),
         ],
+        'smsnoc' => [
+            'api_token' => env('KOTHA_SMSNOC_TOKEN'),
+            'sender_id' => env('KOTHA_SMSNOC_SENDER_ID'),
+        ],
     ],
 
     /*

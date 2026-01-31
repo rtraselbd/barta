@@ -17,6 +17,7 @@ use Larament\Kotha\Drivers\InfobipDriver;
 use Larament\Kotha\Drivers\LogDriver;
 use Larament\Kotha\Drivers\MimsmsDriver;
 use Larament\Kotha\Drivers\RobiDriver;
+use Larament\Kotha\Drivers\SmsnocDriver;
 use Larament\Kotha\Drivers\SslDriver;
 
 class KothaManager extends Manager
@@ -89,5 +90,10 @@ class KothaManager extends Manager
     protected function createElitbuzzDriver(): ElitbuzzDriver
     {
         return new ElitbuzzDriver($this->config->get('kotha.drivers.elitbuzz'));
+    }
+
+    protected function createSmsnocDriver(): SmsnocDriver
+    {
+        return new SmsnocDriver($this->config->get('kotha.drivers.smsnoc'));
     }
 }
