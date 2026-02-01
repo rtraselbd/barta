@@ -249,10 +249,8 @@ use Larament\Barta\Exceptions\BartaException;
 
 class CustomGatewayDriver extends AbstractDriver
 {
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         $response = Http::withToken($this->config['api_token'])
             ->post('https://api.customgateway.com/sms', [
                 'to' => implode(',', $this->recipients),

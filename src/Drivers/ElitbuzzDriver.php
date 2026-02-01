@@ -10,10 +10,8 @@ use Larament\Barta\Exceptions\BartaException;
 
 final class ElitbuzzDriver extends AbstractDriver
 {
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         $response = Http::timeout($this->timeout)
             ->retry($this->retry, $this->retryDelay)
             ->asForm()
@@ -39,8 +37,6 @@ final class ElitbuzzDriver extends AbstractDriver
 
     protected function validate(): void
     {
-        parent::validate();
-
         if (empty($this->config['url'])) {
             throw new BartaException('Please set url for ElitBuzz in config/barta.php.');
         }

@@ -9,10 +9,8 @@ use Larament\Barta\Data\ResponseData;
 
 class LogDriver extends AbstractDriver
 {
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         Log::info('[BARTA] Message sent', [
             'recipients' => $this->recipients,
             'message' => $this->message,

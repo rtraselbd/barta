@@ -12,10 +12,8 @@ final class BulksmsDriver extends AbstractDriver
 {
     private string $baseUrl = 'https://bulksmsbd.net/api';
 
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         $response = Http::baseUrl($this->baseUrl)
             ->timeout($this->timeout)
             ->retry($this->retry, $this->retryDelay)
@@ -37,8 +35,6 @@ final class BulksmsDriver extends AbstractDriver
 
     protected function validate(): void
     {
-        parent::validate();
-
         if (empty($this->config['api_key'])) {
             throw new BartaException('Please set api_key for BulkSMS in config/barta.php.');
         }

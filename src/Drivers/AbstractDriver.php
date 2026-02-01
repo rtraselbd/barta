@@ -36,13 +36,27 @@ abstract class AbstractDriver
     /**
      * Send the message
      */
-    abstract public function send(): ResponseData;
+    abstract protected function execute(): ResponseData;
+
+    /**
+     * Send the message immediately.
+     */
+    final public function send(): ResponseData
+    {
+        $this->ensureRequiredParametersAreSet();
+
+        $this->validate();
+
+        return $this->execute();
+    }
 
     /**
      * Queue the message for later sending.
      */
     final public function queue(?string $queue = null, ?string $connection = null): PendingDispatch
     {
+        $this->ensureRequiredParametersAreSet();
+
         $this->validate();
 
         $job = new SendSmsJob(
@@ -119,10 +133,8 @@ abstract class AbstractDriver
         return $phone;
     }
 
-    /**
-     * Validate the recipient and message
-     */
-    protected function validate(): void
+    // Ensure that required parameters are set before sending
+    private function ensureRequiredParametersAreSet(): void
     {
         if (empty($this->recipients)) {
             throw BartaException::missingRecipient();
@@ -131,5 +143,14 @@ abstract class AbstractDriver
         if (empty($this->message)) {
             throw BartaException::missingMessage();
         }
+    }
+
+    /**
+     * Validate driver-specific configuration.
+     * Override this method in child classes if needed.
+     */
+    protected function validate(): void
+    {
+        // Optional: Child classes can override for custom validation
     }
 }

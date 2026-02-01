@@ -12,10 +12,8 @@ final class BanglalinkDriver extends AbstractDriver
 {
     private string $baseUrl = 'https://vas.banglalink.net/sendSMS';
 
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         $response = Http::baseUrl($this->baseUrl)
             ->timeout($this->timeout)
             ->retry($this->retry, $this->retryDelay)
@@ -43,8 +41,6 @@ final class BanglalinkDriver extends AbstractDriver
 
     protected function validate(): void
     {
-        parent::validate();
-
         if (empty($this->config['user_id'])) {
             throw new BartaException('Please set user_id for Banglalink in config/barta.php.');
         }

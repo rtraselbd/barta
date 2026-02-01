@@ -12,10 +12,8 @@ final class AlphasmsDriver extends AbstractDriver
 {
     private string $baseUrl = 'https://api.sms.net.bd';
 
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         $params = [
             'api_key' => $this->config['api_key'],
             'msg' => $this->message,
@@ -49,8 +47,6 @@ final class AlphasmsDriver extends AbstractDriver
 
     protected function validate(): void
     {
-        parent::validate();
-
         if (empty($this->config['api_key'])) {
             throw new BartaException('Please set api_key for Alpha in config/barta.php.');
         }

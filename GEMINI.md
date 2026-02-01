@@ -60,7 +60,7 @@ final class ClassName
 
 1. Extend `AbstractDriver`
 2. Mark as `final class`
-3. Implement `send(): ResponseData`
+3. Implement `execute(): ResponseData`
 4. Override `validate()` to check driver-specific config
 5. Use `$this->recipients` (array) and `$this->message` (string)
 
@@ -81,10 +81,8 @@ final class NewGatewayDriver extends AbstractDriver
 {
     private string $baseUrl = 'https://api.gateway.com';
 
-    public function send(): ResponseData
+    protected function execute(): ResponseData
     {
-        $this->validate();
-
         $response = Http::baseUrl($this->baseUrl)
             ->withToken($this->config['api_token'])
             ->timeout($this->timeout)
@@ -109,8 +107,6 @@ final class NewGatewayDriver extends AbstractDriver
 
     protected function validate(): void
     {
-        parent::validate();
-
         if (! $this->config['api_token']) {
             throw new BartaException('Please set api_token for NewGateway in config/barta.php.');
         }
@@ -126,7 +122,6 @@ final class NewGatewayDriver extends AbstractDriver
 
 - [ ] Extends `AbstractDriver`
 - [ ] Uses `final class`
-- [ ] Calls `$this->validate()` first in `send()`
 - [ ] Uses `implode(',', $this->recipients)` for bulk support
 - [ ] Uses `$this->timeout`, `$this->retry`, `$this->retryDelay`
 - [ ] Returns `ResponseData` object
