@@ -69,7 +69,7 @@ Barta::to('01712345678')
     ->send();
 
 // Use a specific gateway
-Barta::driver('esms')
+Barta::driver('DRIVER_NAME')
     ->to('01712345678')
     ->message('Hello!')
     ->send();
