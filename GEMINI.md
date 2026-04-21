@@ -7,7 +7,7 @@ These guidelines ensure consistency across the Barta SMS package codebase.
 ### General Rules
 
 - Always use `declare(strict_types=1);` at the top of every PHP file
-- Use PHP 8.4+ features (constructor promotion, named arguments, readonly, etc.)
+- Use PHP 8.2+ features (constructor promotion, named arguments, readonly, etc.)
 - Follow PSR-12 coding standards (enforced by Laravel Pint)
 - Run `composer format` before committing
 
