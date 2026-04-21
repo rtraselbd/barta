@@ -80,6 +80,21 @@ return [
             'api_token' => env('BARTA_SMSNOC_TOKEN'),
             'sender_id' => env('BARTA_SMSNOC_SENDER_ID'),
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Advanced Routing Drivers
+        |--------------------------------------------------------------------------
+        |
+        | These drivers allow you to compose multiple other drivers.
+        |
+        */
+        // 'fallback' => [
+        //     'drivers' => ['mimsms', 'esms'],
+        // ],
+        // 'roundrobin' => [
+        //     'drivers' => ['mimsms', 'esms', 'ssl'],
+        // ],
     ],
 
     /*
